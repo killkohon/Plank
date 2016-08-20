@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.ponder</groupId>
+        <artifactId>serviceframework</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>org.ponder.serviceframework</groupId>
+    <artifactId>FrameworkContract</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Ponder服务治理架构:接口契约</name>
+    <url>http://ponder.org/serviceframework/FrameworkContract</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Class-Path>${project.build.finalName}.jar</Class-Path>
+                            <Built-By>Ponder</Built-By>
+                            <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                            <Bundle-Name>${project.groupId}.${project.ArtifactId}_${maven.build.timestamp}</Bundle-Name>
+                            <Bundle-SymbolicName>${project.groupId}.${project.ArtifactId}</Bundle-SymbolicName>
+                            <Bundle-Version>${project.version}</Bundle-Version>
+                            <Bundle-Vendor>${project.groupId}</Bundle-Vendor>
+                            <Export-Package>org.ponder.serviceframework.FrameworkContract;version="1.0.0"</Export-Package>
+                            <Import-Package>org.osgi.framework</Import-Package>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

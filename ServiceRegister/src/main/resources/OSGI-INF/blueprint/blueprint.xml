@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.2.0" 
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 https://osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd 
+           http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.2.0 http://aries.apache.org/schemas/blueprint-ext/blueprint-ext-1.2.xsd 
+           http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd 
+            http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+    <cm:property-placeholder persistent-id="RPCService.exporter" update-strategy="reload" >
+        <cm:default-properties>
+            <cm:property name="ThriftServer.host" value="192.168.1.101"/>
+            <cm:property name="ThriftServer.port" value="9001"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+    <reference id="EtcdInstance" interface="mousio.etcd4j.EtcdClient" ext:proxy-method="classes" filter="(instance=Etcd4PonderService)" availability="mandatory" />
+    <bean id="RegisterBean" class="org.ponder.serviceframework.ServiceRegister.Register" scope="singleton">
+        <property name="etcd" ref="EtcdInstance"/>
+    </bean> 
+    <bean id="ThriftServer" class="org.ponder.serviceframework.ServiceRegister.ThriftServerSkeleton" factory-method="newinstance" init-method="open" destroy-method="close">
+        <argument value="${ThriftServer.host}"/>
+        <argument value="${ThriftServer.port}"/>
+    </bean>
+    <reference-list  filter="(&amp;(service.exported.interfaces=*)(|(service.exported.type=Thrift)(service.exported.type=GRPC)))" member-type="service-reference" availability="optional">
+        <reference-listener bind-method="AddService" unbind-method="RemoveService">
+            <bean class="org.ponder.serviceframework.ServiceRegister.ServiceExporter">
+                <property name="context" ref="blueprintBundleContext"/>
+                <property name="register" ref="RegisterBean"/>
+                <property name="thriftserver" ref="ThriftServer"/>
+            </bean>
+        </reference-listener>
+    </reference-list>
+    <bean id="Register" class="org.ponder.serviceframework.ServiceRegister.Register">
+        <property name="etcd" ref="EtcdInstance"/>
+    </bean>
+</blueprint>
