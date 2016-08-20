@@ -17,12 +17,22 @@ Plank是一个基于OSGI和Thrift RPC的服务治理框架，用etcd作为包含
 3、服务调用
 
   服务调用方需引入Thrift IDL对应的接口，通过InvokerProxyFactory来创建相应调用代理（InvokerProxy)，通过调用代理来实现服务调用。
+  
+  示例：
+  
+   InvokerProxyFactory factory = InvokerProxyFactory.getFactory("http://192.168.1.8:4001", null, null, "founder");
+   
+   calculate.Iface cal=(calculate.Iface)factory.CreateThriftProxy("org.ponder.samples.Thrift.calculate$Iface", "1.0.0");
+   
+   long result=cal.add(1,1)
 
 后续会逐渐添加服务统计、服务监控以及其它PRC的支持；
 
 所有实现都将基于OSGi模块化规范。
 
 欢迎和Killko Hon交流Plank的相关技术问题。
+
 Email:killko@qq.com
+
 QQ: 405366881
 
