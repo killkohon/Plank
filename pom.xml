@@ -78,7 +78,6 @@
 
     <!--子模块 -->
     <modules>
-        <module>ServiceCore</module>
         <module>ServiceRegister</module>
         <module>ServiceInvoker</module>
         <module>FrameworkContract</module>

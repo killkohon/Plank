@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.ponder.serviceframework.ServiceCore;
+package org.ponder.serviceframework.ServiceRegister;
 
 /**
  *

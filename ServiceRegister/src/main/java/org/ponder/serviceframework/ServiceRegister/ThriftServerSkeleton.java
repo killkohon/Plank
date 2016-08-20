@@ -16,7 +16,6 @@ import org.apache.thrift.server.TThreadPoolServer.Args;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.ponder.serviceframework.ServiceCore.IRPCServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -14,7 +14,6 @@ import mousio.etcd4j.responses.EtcdException;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.ponder.serviceframework.FrameworkContract.ServiceProtocol;
-import org.ponder.serviceframework.ServiceCore.IRPCServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
