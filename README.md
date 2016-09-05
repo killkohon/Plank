@@ -28,6 +28,8 @@ Plank是一个基于OSGI和Thrift RPC的服务治理框架，用etcd作为包含
 
 后续会逐渐添加服务统计、服务监控以及其它PRC的支持；
 
+这个工程依赖一个EtcdUtil的工具，这个工具在我的github里可以找到
+
 所有实现都将基于OSGi模块化规范。
 
 欢迎和Killko Hon交流Plank的相关技术问题。
